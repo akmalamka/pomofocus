@@ -1,5 +1,8 @@
+@import "tailwindcss";
+@import './fonts.css';
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Heinz Label, serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -31,9 +34,9 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-family: SF Pro Display, sans-serif;
 }
+
 
 button {
   border-radius: 8px;
