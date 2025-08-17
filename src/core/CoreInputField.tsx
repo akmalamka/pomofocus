@@ -6,6 +6,7 @@ export const CoreInputField = styled(TextField)(() => ({
 //   height: "500px", // customize height
   "& .MuiInputBase-input": {
     fontFamily: "SF Pro Display, sans-serif", // value text
+    textAlign: "center", // center text
     fontSize: "45px",
     color: "#EEEEEE",
     "::placeholder": {

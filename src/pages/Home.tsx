@@ -1,9 +1,14 @@
 import CoreInputField from "../core/CoreInputField";
 import { CoreButton } from "../core/CoreButton";
 import { useRef, useState } from "react";
+import { useAppProvider } from "../context";
 
 export default function Home() {
     const [timeLeft, settimeLeft] = useState(10);
+    const {taskName, setTaskName} = useAppProvider();
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTaskName(e.target.value);
+    };
     const intervalRef = useRef<number | null>(null);
 
     function startTimer() {
@@ -29,7 +34,7 @@ export default function Home() {
     <section className='flex justify-center h-screen w-screen bg-[#EEEEEE]'>
         <div className= 'container bg-[url(/tomato.svg)] bg-no-repeat bg-cover bg-position-[center_top_30%] h-full w-full flex flex-col items-center justify-end text-center text-[#EEEEEE] pb-16'>
             <h1 className='heinz text-[70px]'>Good Morning!</h1>
-            <CoreInputField placeholder="What would you like to accomplish today?" variant="standard"/>
+            <CoreInputField placeholder="What would you like to accomplish today?" variant="standard"  value={taskName} onChange={handleInputChange}/>
             <h3 className='text-[300px] leading-[normal]'>
                 <span>{String(Math.floor(timeLeft / 60)).padStart(2, "0")}</span>
                 <span>:</span>

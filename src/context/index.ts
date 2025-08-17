@@ -1,6 +1,8 @@
 import { createContext, useContext } from "react";
 
 interface AppContextType {
+  taskName: string;
+  setTaskName: (name: string) => void;
   focusLength: number | null;
   setFocusLength: (newLength: number | null) => void;
   shortBreakLength: number | null;
@@ -12,6 +14,12 @@ interface AppContextType {
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export function getStoredValue<T>(key: string, defaultValue: T): T {
+  if (typeof window === 'undefined') return defaultValue;
+  const stored = localStorage.getItem(key);
+  return stored ? JSON.parse(stored) : defaultValue;
+}
 
 export function useAppProvider() {
   const context = useContext(AppContext);
