@@ -9,8 +9,10 @@ interface AppContextType {
   setShortBreakLength: (newLength: number | null) => void;
   longBreakLength: number | null;
   setLongBreakLength: (newLength: number | null) => void;
-  pomodoroCount: number | null;
-  setPomodoroCount: (newCount: number | null) => void;
+  pomodoroUntilLongBreak: number | null;
+  setPomodoroUntilLongBreak: (newCount: number | null) => void;
+  currentMode: 'focus' | 'shortBreak' | 'longBreak';
+  setCurrentMode: (mode: 'focus' | 'shortBreak' | 'longBreak') => void;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);

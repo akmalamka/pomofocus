@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useAppProvider } from '../context';
 
 export default function LayoutHeader() {
-  const { focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroCount, setPomodoroCount } = useAppProvider();
+  const { focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider();
 
   const [open, setOpen] = useState(false);
   
@@ -36,7 +36,7 @@ export default function LayoutHeader() {
             </div>
             <div className='flex gap-4 justify-between'>
               <span className='text-[16px]'>Pomodoros until long break (minutes)</span>
-              <CoreNumberField value={pomodoroCount} onValueChange={setPomodoroCount}/>
+              <CoreNumberField value={pomodoroUntilLongBreak} onValueChange={setPomodoroUntilLongBreak}/>
             </div>
             <div className='flex gap-4 justify-between'>
               <span className='text-[16px]'>Short break length (minutes)</span>

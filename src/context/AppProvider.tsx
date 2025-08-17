@@ -6,7 +6,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [focusLength, setFocusLength] = useState<number | null>(getStoredValue('focusLength', 25));
   const [shortBreakLength, setShortBreakLength] = useState<number | null>(getStoredValue('shortBreakLength', 5));
   const [longBreakLength, setLongBreakLength] = useState<number | null>(getStoredValue('longBreakLength', 15));
-  const [pomodoroCount, setPomodoroCount] = useState<number | null>(getStoredValue('pomodoroCount', 4));
+  const [pomodoroUntilLongBreak, setPomodoroUntilLongBreak] = useState<number | null>(getStoredValue('pomodoroUntilLongBreak', 4));
+
+  const [currentMode, setCurrentMode] = useState<'focus' | 'shortBreak' | 'longBreak'>(getStoredValue('currentMode', 'focus'));
 
 
   // Save to localStorage whenever values change
@@ -29,12 +31,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [longBreakLength]);
 
   useEffect(() => {
-    localStorage.setItem('pomodoroCount', JSON.stringify(pomodoroCount));
-  }, [pomodoroCount]);
- 
+    localStorage.setItem('pomodoroUntilLongBreak', JSON.stringify(pomodoroUntilLongBreak));
+  }, [pomodoroUntilLongBreak]);
+
+  useEffect(() => {
+    localStorage.setItem('currentMode', JSON.stringify(currentMode));
+  }, [currentMode]);
   
   return (
-    <AppContext.Provider value={{ taskName, setTaskName, focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroCount, setPomodoroCount }}>
+    <AppContext.Provider value={{ taskName, setTaskName, focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak, currentMode, setCurrentMode }}>
       {children}
     </AppContext.Provider>
   );
