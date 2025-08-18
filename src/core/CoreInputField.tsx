@@ -3,11 +3,10 @@ import TextField from "@mui/material/TextField";
 
 export const CoreInputField = styled(TextField)(() => ({
   width: "800px", // customize width
-//   height: "500px", // customize height
   "& .MuiInputBase-input": {
     fontFamily: "SF Pro Display, sans-serif", // value text
     textAlign: "center", // center text
-    fontSize: "45px",
+    fontSize: "32px",
     color: "#EEEEEE",
     "::placeholder": {
       color: "#EEEEEE",   // placeholder color

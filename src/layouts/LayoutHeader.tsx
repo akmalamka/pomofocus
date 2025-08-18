@@ -5,7 +5,7 @@ import CoreNumberField from '../core/CoreNumberField';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppProvider } from '../context';
 import IconButton from '@mui/material/IconButton';
-import { CoreButton } from '../core/CoreButton';
+import Button from '@mui/material/Button';
 
 export default function LayoutHeader() {
   const { focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak} = useAppProvider();
@@ -32,7 +32,7 @@ export default function LayoutHeader() {
   return (
     <header className="z-10 fixed left-0 top-0 w-screen bg-transparent text-black flex justify-center">
         <div className="h-[var(--navbar-height)] w-full flex items-center justify-between container my-4">
-            <span className="heinz text-[40px]">Pomofocus</span>
+            <span className="font-heading text-[40px]">Pomofocus</span>
             <IconButton aria-label="Settings" onClick={toggleDrawer(true)}>
               <SettingsIcon sx={{fontSize: 40}} className='text-black'/>
             </IconButton>
@@ -41,7 +41,7 @@ export default function LayoutHeader() {
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         <div className='flex min-w-[300px] h-full py-8 px-10 flex-col gap-8'>
           <div className='flex items-center justify-between'>
-            <span className='heinz text-[40px]'>
+            <span className='font-heading text-[40px]'>
               Settings
             </span>
             <IconButton aria-label="Close" onClick={toggleDrawer(false)}>
@@ -67,9 +67,9 @@ export default function LayoutHeader() {
                   <CoreNumberField value={tempLongBreakLength} onValueChange={setTempLongBreakLength}/>
                 </div>
             </div>
-            <CoreButton onClick={handleSave} className='justify-self-end'>
+            <Button color='primary' variant='contained' onClick={handleSave} className='justify-self-end'>
               Save
-            </CoreButton>
+            </Button>
           </div>
           </div>
 

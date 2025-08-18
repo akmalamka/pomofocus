@@ -1,19 +1,17 @@
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
-export const CoreButton = styled(Button)(() => ({
-  fontFamily: "SF Pro Display, sans-serif",
-  textTransform: "uppercase", // keep normal casing
-  fontSize: "32px",
-  padding: "8px 20px",
-  borderRadius: "8px",
 
+export const CoreButton = styled(Button)(() => ({
   // contained variant
   "&.MuiButton-contained": {
-    backgroundColor: "green",
-    color: "white",
+    backgroundColor: "#EEEEEE",
+    color: "black",
     "&:hover": {
-      backgroundColor: "darkgreen", // optional hover
+      backgroundColor: "rgba(255, 255, 255, 0.08)", // subtle hover
+    },
+    "&:active": {
+      backgroundColor: "#D6D6D6", // pressed state
     },
   },
 
@@ -24,6 +22,10 @@ export const CoreButton = styled(Button)(() => ({
     "&:hover": {
       border: "2px solid #cccccc",
       backgroundColor: "rgba(255, 255, 255, 0.08)", // subtle hover
+    },
+    "&:active": {
+      border: "2px solid #aaaaaa",
+      backgroundColor: "rgba(255, 255, 255, 0.12)", // pressed
     },
   },
 }));

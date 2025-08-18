@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CoreButton } from "./CoreButton";
 import { useAppProvider } from "../context";
+import { CoreButton } from "./CoreButton";
 
 export default function CoreTimer() {
   const {focusLength, shortBreakLength, longBreakLength, currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak} = useAppProvider();
@@ -58,6 +58,14 @@ export default function CoreTimer() {
     setIsRunning((prev) => !prev);
   };
 
+  // Play sound when it hits 0
+  useEffect(() => {
+    if (timeLeft === 0) {
+      const audio = new Audio("/chime-sound.mp3");
+      audio.play().catch((err) => console.log("Audio play error:", err));
+    }
+  }, [timeLeft]);
+
   function resetTimer() {
     clearInterval(intervalRef.current!);
     intervalRef.current = null;
@@ -98,17 +106,16 @@ export default function CoreTimer() {
     <div className="flex flex-col items-center">
       <h3 className='text-[200px] leading-[normal]'>
         {timeLeft !== null ?
-          <>
-            <span>{String(Math.floor(timeLeft / 60)).padStart(2, "0")}</span>
-            <span>:</span>
-            <span>{String(timeLeft % 60).padStart(2, "0")}</span>
-          </>
+          <div className="flex items-center justify-center">
+            <div className="w-[5ch] tabular-nums">{String(Math.floor(timeLeft / 60)).padStart(2, "0")}:{String(timeLeft % 60).padStart(2, "0")}
+            </div>
+          </div>
         : null
         }
           
       </h3>
         <div className="flex gap-4">
-          <CoreButton variant="outlined" onClick={toggleTimer}>
+          <CoreButton variant="contained" onClick={toggleTimer}>
               {isRunning ? 'Pause' : 'Start'}
           </CoreButton>
           { currentMode === 'shortBreak' || currentMode === 'longBreak' ?

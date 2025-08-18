@@ -1,21 +1,19 @@
 @import "tailwindcss";
 @import './fonts.css';
 
+@theme {
+  --font-heading: 'Heinz Label', serif;
+  --font-body: 'SF Pro Display', sans-serif;
+}
+
 :root {
   font-family: SF Pro Display, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
   overflow: hidden;
-
   background-color: #EEEEEE;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.heinz {
-  font-family: Heinz Label, serif;
-  line-height: normal;
 }
