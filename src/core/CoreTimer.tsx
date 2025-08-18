@@ -96,7 +96,7 @@ export default function CoreTimer() {
 
   return (
     <div className="flex flex-col items-center">
-      <h3 className='text-[300px] leading-[normal]'>
+      <h3 className='text-[200px] leading-[normal]'>
         {timeLeft !== null ?
           <>
             <span>{String(Math.floor(timeLeft / 60)).padStart(2, "0")}</span>

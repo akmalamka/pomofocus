@@ -24,9 +24,9 @@ export default function Home() {
 
   return (
     <section className='flex justify-center h-screen w-screen bg-[#EEEEEE]'>
-        <div className='container bg-no-repeat bg-cover bg-position-[center_top_30%] h-full w-full flex flex-col items-center justify-end text-center text-[#EEEEEE] pb-16'
+        <div className='container bg-no-repeat bg-cover bg-position-[center_top_30%] h-full w-full flex flex-col items-center justify-end text-center text-[#EEEEEE] pb-12 gap-4'
         style={{backgroundImage: getBackgroundImage()}}>
-            <h1 className='heinz text-[70px]'>{currentMode}</h1>
+            <h1 className='heinz text-[60px]'>{currentMode}</h1>
             <CoreInputField placeholder="What would you like to accomplish today?" variant="standard"  value={taskName} onChange={handleInputChange}/>
             <CoreTimer/>
         </div>

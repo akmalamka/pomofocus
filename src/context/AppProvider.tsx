@@ -12,8 +12,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
 
   // Save to localStorage whenever values change
-  // TODO: save changes to localStorage when the drawer is closed
-
   useEffect(() => {
     localStorage.setItem('taskName', JSON.stringify(taskName));
   }, [taskName]);
@@ -37,7 +35,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     localStorage.setItem('currentMode', JSON.stringify(currentMode));
   }, [currentMode]);
-  
+
   return (
     <AppContext.Provider value={{ taskName, setTaskName, focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak, currentMode, setCurrentMode }}>
       {children}
