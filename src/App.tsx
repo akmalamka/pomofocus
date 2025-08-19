@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@mui/material'
-import './App.css'
 import LayoutMain from './layouts/LayoutMain'
 import Home from './pages/Home'
 import theme from './theme'
+import './App.css'
 
 function App() {
   return (

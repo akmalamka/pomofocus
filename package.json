@@ -1,8 +1,8 @@
 {
   "name": "my-app",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -16,11 +16,13 @@
     "@mui/icons-material": "^7.3.1",
     "@mui/material": "^7.3.1",
     "@tailwindcss/vite": "^4.1.12",
+    "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^5.2.1",
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

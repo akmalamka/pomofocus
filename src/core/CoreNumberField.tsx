@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { NumberField } from '@base-ui-components/react/number-field';
-import styles from './index.module.css';
+import { NumberField } from '@base-ui-components/react/number-field'
+import * as React from 'react'
+import styles from './index.module.css'
 
-export default function CoreNumberField({value, onValueChange}: {value: number | null, onValueChange: (value: number | null) => void}) {
-  const id = React.useId();
+export default function CoreNumberField({ value, onValueChange }: { value: number | null, onValueChange: (value: number | null) => void }) {
+  const id = React.useId()
   return (
     <NumberField.Root id={id} className={styles.Field} value={value} onValueChange={onValueChange} min={0} max={60} step={1}>
       <NumberField.Group className={styles.Group}>
@@ -16,7 +16,7 @@ export default function CoreNumberField({value, onValueChange}: {value: number |
         </NumberField.Increment>
       </NumberField.Group>
     </NumberField.Root>
-  );
+  )
 }
 
 function PlusIcon(props: React.ComponentProps<'svg'>) {
@@ -33,7 +33,7 @@ function PlusIcon(props: React.ComponentProps<'svg'>) {
     >
       <path d="M0 5H5M10 5H5M5 5V0M5 5V10" />
     </svg>
-  );
+  )
 }
 
 function MinusIcon(props: React.ComponentProps<'svg'>) {
@@ -50,5 +50,5 @@ function MinusIcon(props: React.ComponentProps<'svg'>) {
     >
       <path d="M0 5H10" />
     </svg>
-  );
+  )
 }
