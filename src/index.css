@@ -1,13 +1,8 @@
 @import "tailwindcss";
 @import './fonts.css';
 
-@theme {
-  --font-heading: 'Heinz Label', serif;
-  --font-body: 'SF Pro Display', sans-serif;
-}
 
 :root {
-  font-family: SF Pro Display, sans-serif;
   font-weight: 400;
   overflow: hidden;
   /* TODO: check why background default in theme not applies, instead this background-color applies */

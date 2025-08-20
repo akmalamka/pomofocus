@@ -139,11 +139,11 @@ export default function CoreTimer() {
 
   return (
     <div className="flex flex-col items-center">
-      <CoreTomatoIcon
+      {/* <CoreTomatoIcon
         // className="w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1 text-blue-500"
         // currentColor={currentColor}
         // style={{ color: `linear-gradient(135deg, rgb(${currentColor.join(",")}), #000000)` }}
-      />
+      /> */}
       {/* <img src="/tomato.svg" alt="Logo" className='w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1'
         /> */}
       <h3 className="text-[200px] leading-[normal]">
@@ -161,7 +161,7 @@ export default function CoreTimer() {
 
       </h3>
       <div className="flex gap-4 color-blue-500">
-        <Button color="primary" size="medium" onClick={toggleTimer}>
+        <Button color="primary" onClick={toggleTimer}>
           {isRunning ? 'Pause' : 'Start'}
         </Button>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'

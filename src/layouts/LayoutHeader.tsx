@@ -3,8 +3,10 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { useAppProvider } from '../context'
+import ConfirmDialog from '../core/CoreDialog'
 import CoreNumberField from '../core/CoreNumberField'
 
 export default function LayoutHeader() {
@@ -15,10 +17,15 @@ export default function LayoutHeader() {
   const [tempLongBreakLength, setTempLongBreakLength] = useState(longBreakLength)
   const [tempPomodoroUntilLongBreak, setTempPomodoroUntilLongBreak] = useState(pomodoroUntilLongBreak)
 
-  const [open, setOpen] = useState(false)
+  const [openDrawer, setOpenDrawer] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
 
   const toggleDrawer = (state: boolean) => () => {
-    setOpen(state)
+    setOpenDrawer(state)
+  }
+
+  const toggleDialog = (state: boolean) => () => {
+    setOpenDialog(state)
   }
 
   function handleSave() {
@@ -26,54 +33,86 @@ export default function LayoutHeader() {
     setShortBreakLength(tempShortBreakLength)
     setLongBreakLength(tempLongBreakLength)
     setPomodoroUntilLongBreak(tempPomodoroUntilLongBreak)
-    setOpen(false)
+    setOpenDrawer(false)
   }
 
   return (
-    <header className="z-10 fixed left-0 top-0 w-screen bg-transparent text-black flex justify-center">
+    <header className="z-10 fixed left-0 top-0 w-screen bg-transparent flex justify-center">
       <div className="h-[var(--navbar-height)] w-full flex items-center justify-between container my-4">
-        <span className="font-heading text-[40px]">Pomofocus</span>
-        <IconButton aria-label="Settings" onClick={toggleDrawer(true)}>
-          <SettingsIcon sx={{ fontSize: 40 }} className="text-black" />
+        <img src="/logo.svg" alt="Pomofocus Logo" className="h-[32px]" />
+        <IconButton aria-label="Settings" onClick={toggleDrawer(true)} color="white">
+          <SettingsIcon sx={{ fontSize: 24 }} color="primary" />
         </IconButton>
       </div>
 
-      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+      <Drawer anchor="left" open={openDrawer} onClose={toggleDrawer(false)}>
         <div className="flex min-w-[300px] h-full py-8 px-10 flex-col gap-8">
           <div className="flex items-center justify-between">
-            <span className="font-heading text-[40px]">
+            <Typography color="primary" variant="h3">
               Settings
-            </span>
-            <IconButton aria-label="Close" onClick={toggleDrawer(false)}>
-              <CloseIcon sx={{ fontSize: 40 }} className="text-black" />
+            </Typography>
+            <IconButton aria-label="Close" onClick={toggleDialog(true)}>
+              <CloseIcon sx={{ fontSize: 24 }} color="primary" />
             </IconButton>
           </div>
           <div className="flex flex-col justify-between h-full">
             <div className="flex gap-4 flex-col">
-              <div className="flex gap-4 justify-between">
-                <span className="text-[16px]">Focus length (minutes)</span>
-                <CoreNumberField value={tempFocusLength} onValueChange={setTempFocusLength} />
-              </div>
-              <div className="flex gap-4 justify-between">
-                <span className="text-[16px]">Pomodoros until long break (minutes)</span>
-                <CoreNumberField value={tempPomodoroUntilLongBreak} onValueChange={setTempPomodoroUntilLongBreak} />
-              </div>
-              <div className="flex gap-4 justify-between">
-                <span className="text-[16px]">Short break length (minutes)</span>
-                <CoreNumberField value={tempShortBreakLength} onValueChange={setTempShortBreakLength} />
-              </div>
-              <div className="flex gap-4 justify-between">
-                <span className="text-[16px]">Long break length (minutes)</span>
-                <CoreNumberField value={tempLongBreakLength} onValueChange={setTempLongBreakLength} />
-              </div>
+              <SettingsItem
+                label="Focus length (minutes)"
+                value={tempFocusLength}
+                onValueChange={setTempFocusLength}
+              />
+              <SettingsItem
+                label="Pomodoros until long break (minutes)"
+                value={tempPomodoroUntilLongBreak}
+                onValueChange={setTempPomodoroUntilLongBreak}
+              />
+
+              <SettingsItem
+                label="Short break length (minutes)"
+                value={tempShortBreakLength}
+                onValueChange={setTempShortBreakLength}
+              />
+
+              <SettingsItem
+                label="Long break length (minutes)"
+                value={tempLongBreakLength}
+                onValueChange={setTempLongBreakLength}
+              />
             </div>
-            <Button color="primary" variant="contained" onClick={handleSave} className="justify-self-end">
+            <Button color="primary" onClick={handleSave} className="justify-self-end">
               Save
             </Button>
           </div>
         </div>
-
       </Drawer>
+
+      <ConfirmDialog
+        open={openDialog}
+        title="Save before you go"
+        description="Your settings aren’t saved yet. Save them first to keep your changes."
+        onClose={() => setOpenDialog(false)}
+        onConfirm={() => {
+          handleSave()
+          setOpenDialog(false)
+        }}
+      />
+
     </header>
+  )
+}
+
+interface SettingsItemProps {
+  label: string
+  value: number | null
+  onValueChange: (newValue: number | null) => void
+}
+
+function SettingsItem({ label, value, onValueChange }: SettingsItemProps) {
+  return (
+    <div className="flex gap-4 justify-between items-center">
+      <Typography variant="body2">{label}</Typography>
+      <CoreNumberField value={value} onValueChange={onValueChange} />
+    </div>
   )
 }
