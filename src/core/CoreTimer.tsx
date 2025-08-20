@@ -1,7 +1,6 @@
 import { Button } from '@mui/material'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
-import CoreTomatoIcon from './CoreTomatoIcon'
 
 export default function CoreTimer() {
   const { focusLength, shortBreakLength, longBreakLength, currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
