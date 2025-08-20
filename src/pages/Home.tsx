@@ -70,9 +70,6 @@ export default function Home() {
               )}
         </TomatoWrapper>
       </div>
-      {/* <div className="container absolute left-0">
-
-      </div> */}
     </section>
   )
 }
