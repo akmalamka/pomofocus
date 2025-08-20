@@ -7,6 +7,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [shortBreakLength, setShortBreakLength] = useState<number | null>(getStoredValue('shortBreakLength', 5))
   const [longBreakLength, setLongBreakLength] = useState<number | null>(getStoredValue('longBreakLength', 15))
   const [pomodoroUntilLongBreak, setPomodoroUntilLongBreak] = useState<number | null>(getStoredValue('pomodoroUntilLongBreak', 4))
+  const [displayTimer, setDisplayTimer] = useState(getStoredValue('displayTimer', false))
 
   const [currentMode, setCurrentMode] = useState<'focus' | 'shortBreak' | 'longBreak'>(getStoredValue('currentMode', 'focus'))
 
@@ -35,8 +36,28 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('currentMode', JSON.stringify(currentMode))
   }, [currentMode])
 
+  useEffect(() => {
+    localStorage.setItem('displayTimer', JSON.stringify(displayTimer))
+  }, [displayTimer])
+
   return (
-    <AppContext.Provider value={{ taskName, setTaskName, focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak, currentMode, setCurrentMode }}>
+    <AppContext.Provider value={{
+      taskName,
+      setTaskName,
+      focusLength,
+      setFocusLength,
+      shortBreakLength,
+      setShortBreakLength,
+      longBreakLength,
+      setLongBreakLength,
+      pomodoroUntilLongBreak,
+      setPomodoroUntilLongBreak,
+      currentMode,
+      setCurrentMode,
+      displayTimer,
+      setDisplayTimer,
+    }}
+    >
       {children}
     </AppContext.Provider>
   )
