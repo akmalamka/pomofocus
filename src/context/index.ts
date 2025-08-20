@@ -13,6 +13,8 @@ interface AppContextType {
   setPomodoroUntilLongBreak: (newCount: number | null) => void
   currentMode: 'focus' | 'shortBreak' | 'longBreak'
   setCurrentMode: (mode: 'focus' | 'shortBreak' | 'longBreak') => void
+  displayTimer: boolean
+  setDisplayTimer: (newValue: boolean) => void
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined)

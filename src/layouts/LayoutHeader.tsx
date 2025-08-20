@@ -38,7 +38,7 @@ export default function LayoutHeader() {
 
   return (
     <header className="z-10 fixed left-0 top-0 w-screen bg-transparent flex justify-center">
-      <div className="h-[var(--navbar-height)] w-full flex items-center justify-between container my-4">
+      <div className="h-[var(--navbar-height)] w-full flex items-start justify-between container my-10">
         <img src="/logo.svg" alt="Pomofocus Logo" className="h-[32px]" />
         <IconButton aria-label="Settings" onClick={toggleDrawer(true)} color="white">
           <SettingsIcon sx={{ fontSize: 24 }} color="primary" />

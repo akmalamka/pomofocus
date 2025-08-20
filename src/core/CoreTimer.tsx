@@ -1,4 +1,5 @@
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
 
@@ -136,8 +137,21 @@ export default function CoreTimer() {
 
   // }, [currentMode, initialTime]);
 
+  const currentModeDisplay = useMemo(() => {
+    switch (currentMode) {
+      case 'focus':
+        return 'Focus'
+      case 'shortBreak':
+        return 'Short Break'
+      case 'longBreak':
+        return 'Long Break'
+      default:
+        return ''
+    }
+  }, [currentMode])
+
   return (
-    <div className="flex flex-col items-center">
+    <>
       {/* <CoreTomatoIcon
         // className="w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1 text-blue-500"
         // currentColor={currentColor}
@@ -145,7 +159,8 @@ export default function CoreTimer() {
       /> */}
       {/* <img src="/tomato.svg" alt="Logo" className='w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1'
         /> */}
-      <h3 className="text-[200px] leading-[normal]">
+      <Typography color="white" variant="h2">{currentModeDisplay}</Typography>
+      <Typography variant="h4" color="white" className="text-[200px] leading-[normal]">
         {timeLeft !== null
           ? (
               <div className="flex items-center justify-center">
@@ -158,10 +173,13 @@ export default function CoreTimer() {
             )
           : null}
 
-      </h3>
-      <div className="flex gap-4 color-blue-500">
+      </Typography>
+      <div className="flex flex-wrap gap-4 max-w-60% justify-center ">
         <Button color="primary" onClick={toggleTimer}>
           {isRunning ? 'Pause' : 'Start'}
+        </Button>
+        <Button color="white" onClick={resetTimer}>
+          Reset
         </Button>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'
           ? (
@@ -170,10 +188,8 @@ export default function CoreTimer() {
               </Button>
             )
           : null}
-        <Button color="white" onClick={resetTimer}>
-          Reset
-        </Button>
+
       </div>
-    </div>
+    </>
   )
 }

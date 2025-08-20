@@ -4,11 +4,13 @@ declare module '@mui/material/styles' {
   interface Palette {
     yellow: Palette['primary']
     green: Palette['primary']
+    creme: Palette['primary']
     white: Palette['primary']
   }
   interface PaletteOptions {
     yellow?: PaletteOptions['primary']
     green?: PaletteOptions['primary']
+    creme?: PaletteOptions['primary']
     white?: PaletteOptions['primary']
   }
 }
@@ -17,6 +19,7 @@ declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     yellow: true
     green: true
+    creme: true
     white: true
   }
 }
@@ -24,6 +27,7 @@ declare module '@mui/material/TextField' {
   interface TextFieldPropsColorOverrides {
     yellow: true
     green: true
+    creme: true
     white: true
   }
 }
@@ -58,6 +62,11 @@ const theme = createTheme({
       fontSize: '2rem',
       lineHeight: 1,
     },
+    h4: {
+      fontFamily: 'Heinz Label, serif',
+      fontSize: '10rem',
+      lineHeight: 1,
+    },
     body1: {
       fontSize: '1.5rem',
       letterSpacing: '0.02em',
@@ -77,6 +86,9 @@ const theme = createTheme({
       main: '#405647',
       light: '#177721',
       contrastText: '#EEEEEE',
+    },
+    creme: {
+      main: '#EDE3D9',
     },
     yellow: {
       main: '#D18D24',
@@ -215,6 +227,7 @@ const theme = createTheme({
           'width': '100%',
           '& .MuiInputBase-input': {
             fontFamily: 'SF Pro Display, sans-serif',
+            fontSize: '1rem',
             textAlign: 'center',
             borderRadius: 12,
           },
