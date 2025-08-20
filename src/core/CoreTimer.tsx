@@ -1,6 +1,6 @@
+import { Button } from '@mui/material'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
-import { CoreButton } from './CoreButton'
 import CoreTomatoIcon from './CoreTomatoIcon'
 
 export default function CoreTimer() {
@@ -161,19 +161,19 @@ export default function CoreTimer() {
 
       </h3>
       <div className="flex gap-4 color-blue-500">
-        <CoreButton variant="contained" onClick={toggleTimer}>
+        <Button color="primary" size="medium" onClick={toggleTimer}>
           {isRunning ? 'Pause' : 'Start'}
-        </CoreButton>
+        </Button>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'
           ? (
-              <CoreButton variant="outlined" onClick={handleSkipBreak}>
+              <Button color="white" onClick={handleSkipBreak}>
                 Skip Break
-              </CoreButton>
+              </Button>
             )
           : null}
-        <CoreButton variant="outlined" onClick={resetTimer}>
+        <Button color="white" onClick={resetTimer}>
           Reset
-        </CoreButton>
+        </Button>
       </div>
     </div>
   )

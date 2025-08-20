@@ -9,7 +9,7 @@ export default function Home() {
   }
 
   return (
-    <section className="flex justify-center h-screen w-screen bg-[#EEEEEE] relative overflow-hidden">
+    <section className="flex justify-center h-screen w-screen relative overflow-hidden">
       <div className="z-10 container h-full w-full flex flex-col items-center justify-end text-center text-[#EEEEEE] pb-12 gap-4">
         <h1 className="font-heading text-[70px]">{currentMode}</h1>
         <CoreInputField placeholder="What would you like to accomplish today?" variant="standard" value={taskName} onChange={handleInputChange} />
