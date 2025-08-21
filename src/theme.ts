@@ -63,7 +63,7 @@ const theme = createTheme({
       lineHeight: 1,
     },
     h4: {
-      fontFamily: 'SF Pro Display, sans-serif',
+      fontFamily: 'Heinz Label, serif',
       fontSize: '10rem',
     },
     h5: {

@@ -7,10 +7,11 @@ import CoreTimer from '../core/CoreTimer'
 import { useGreeting } from '../hooks/use-greeting'
 import LayoutTomato from '../layouts/LayoutTomato'
 
+const MAX_TEXT_INPUT_CHARS = 20
+
 export default function Home() {
   const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode, focusLength, shortBreakLength, longBreakLength } = useAppProvider()
   const [tempTaskName, setTempTaskName] = useState(taskName)
-  const MAX_TEXT_INPUT_CHARS = 20
 
   function handleContinue() {
     setTaskName(tempTaskName)

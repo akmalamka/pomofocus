@@ -102,16 +102,27 @@ export default function CoreTimer({ timeLeft, setTimeLeft, initialTime }: CoreTi
     }
   }, [currentMode])
 
+  const minutes = useMemo(() => String(Math.floor(timeLeft / 60)).padStart(2, '0'), [timeLeft])
+  const seconds = useMemo(() => String(timeLeft % 60).padStart(2, '0'), [timeLeft])
+
   return (
     <>
       <Typography color="white" variant="h2">{currentModeText}</Typography>
       <Typography variant="h4" color="white" className={`text-[200px] leading-[normal] ${timeLeft < 10 ? 'animate-wiggle' : ''}`}>
         {timeLeft !== null
           ? (
-              <div className="w-[5ch] tabular-nums">
-                {String(Math.floor(timeLeft / 60)).padStart(2, '0')}
-                :
-                {String(timeLeft % 60).padStart(2, '0')}
+              <div className="flex items-center gap-1">
+                {[...minutes].map((digit, i) => (
+                  <span key={`m-${i}`} className="inline-block w-[1ch] text-center">
+                    {digit}
+                  </span>
+                ))}
+                <span className="inline-block text-center">:</span>
+                {[...seconds].map((digit, i) => (
+                  <span key={`s-${i}`} className="inline-block w-[1ch] text-center">
+                    {digit}
+                  </span>
+                ))}
               </div>
             )
           : null}
