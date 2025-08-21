@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAppProvider } from '../context'
 import CoreButton from '../core/CoreButton'
 import CoreTimer from '../core/CoreTimer'
-import CoreTomato from '../core/CoreTomato'
 import { useGreeting } from '../hooks/use-greeting'
+import LayoutTomato from '../layouts/LayoutTomato'
 
 export default function Home() {
   const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode } = useAppProvider()
@@ -52,7 +52,7 @@ export default function Home() {
         <Typography color="creme" variant="h1" className="absolute top-10 h-24">
           {headingText}
         </Typography>
-        <TomatoWrapper>
+        <LayoutTomato>
           {displayTimer
             ? <CoreTimer />
             : (
@@ -68,33 +68,8 @@ export default function Home() {
                   </div>
                 </>
               )}
-        </TomatoWrapper>
+        </LayoutTomato>
       </div>
     </section>
-  )
-}
-
-function TomatoWrapper({ children }: { children: React.ReactNode }) {
-  const { currentMode } = useAppProvider()
-
-  const tomatoColor = useMemo(() => {
-    switch (currentMode) {
-      case 'focus':
-        return '#E61004'
-      case 'shortBreak':
-        return '#D18D24'
-      case 'longBreak':
-        return '#405647'
-      default:
-        return ''
-    }
-  }, [currentMode])
-  return (
-    <div className="relative w-full h-full max-h-[85dvh] top-[8dvh]">
-      <div className="flex flex-col items-center w-3/5 justify-between absolute inset-0 top-1/2 left-1/2 -translate-1/2 text-center gap-4">
-        {children}
-      </div>
-      <CoreTomato color={tomatoColor} className="absolute -z-1 inset-0 m-auto max-h-[85dvh] w-auto" />
-    </div>
   )
 }

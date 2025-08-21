@@ -65,6 +65,10 @@ const theme = createTheme({
     h4: {
       fontFamily: 'SF Pro Display, sans-serif',
       fontSize: '10rem',
+    },
+    h5: {
+      fontFamily: 'Heinz Label, serif',
+      fontSize: '1.5rem',
       lineHeight: 1,
     },
     body1: {
@@ -73,6 +77,10 @@ const theme = createTheme({
     },
     body2: {
       fontSize: '1rem',
+      letterSpacing: '0.02em',
+    },
+    caption: {
+      fontSize: '0.875rem',
       letterSpacing: '0.02em',
     },
   },
