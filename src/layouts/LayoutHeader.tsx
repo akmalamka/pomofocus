@@ -1,13 +1,14 @@
 import CloseIcon from '@mui/icons-material/Close'
 import SettingsIcon from '@mui/icons-material/Settings'
-import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { useAppProvider } from '../context'
+import CoreButton from '../core/CoreButton'
 import ConfirmDialog from '../core/CoreDialog'
 import CoreNumberField from '../core/CoreNumberField'
+import './layout.header.css'
 
 export default function LayoutHeader() {
   const { focusLength, setFocusLength, shortBreakLength, setShortBreakLength, longBreakLength, setLongBreakLength, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
@@ -41,7 +42,7 @@ export default function LayoutHeader() {
       <div className="h-[var(--navbar-height)] w-full flex items-start justify-between container my-10">
         <img src="/logo.svg" alt="Pomofocus Logo" className="h-[32px]" />
         <IconButton aria-label="Settings" onClick={toggleDrawer(true)} color="white">
-          <SettingsIcon sx={{ fontSize: 24 }} color="primary" />
+          <SettingsIcon sx={{ fontSize: 24 }} color="primary" className="icon-spin" />
         </IconButton>
       </div>
 
@@ -52,7 +53,7 @@ export default function LayoutHeader() {
               Settings
             </Typography>
             <IconButton aria-label="Close" onClick={toggleDialog(true)}>
-              <CloseIcon sx={{ fontSize: 24 }} color="primary" />
+              <CloseIcon sx={{ fontSize: 24 }} color="primary" className="icon-spin" />
             </IconButton>
           </div>
           <div className="flex flex-col justify-between h-full">
@@ -80,9 +81,7 @@ export default function LayoutHeader() {
                 onValueChange={setTempLongBreakLength}
               />
             </div>
-            <Button color="primary" onClick={handleSave} className="justify-self-end">
-              Save
-            </Button>
+            <CoreButton color="primary" onClick={handleSave} className="justify-self-end" title="Save" />
           </div>
         </div>
       </Drawer>

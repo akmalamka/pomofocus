@@ -1,8 +1,8 @@
-import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useAppProvider } from '../context'
+import CoreButton from '../core/CoreButton'
 import CoreTimer from '../core/CoreTimer'
 import CoreTomato from '../core/CoreTomato'
 import { useGreeting } from '../hooks/use-greeting'
@@ -42,6 +42,10 @@ export default function Home() {
     }
   }, [displayTimer, currentMode])
 
+  useEffect(() => {
+    setTempTaskName('')
+  }, [displayTimer])
+
   return (
     <section className="flex justify-center h-screen w-screen relative overflow-hidden">
       <div className="container h-full relative max-w-3/5 flex flex-col items-center justify-center gap-4">
@@ -59,12 +63,8 @@ export default function Home() {
                   {/* TODO: add max character so it displays smoothly */}
                   <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} />
                   <div className="flex gap-4">
-                    <Button color="primary" disabled={!tempTaskName} onClick={handleContinue}>
-                      Continue
-                    </Button>
-                    <Button color="white" onClick={() => setDisplayTimer(true)}>
-                      Skip
-                    </Button>
+                    <CoreButton color="primary" disabled={!tempTaskName} onClick={handleContinue} title="Continue" />
+                    <CoreButton color="white" onClick={() => setDisplayTimer(true)} title="Skip" />
                   </div>
                 </>
               )}
@@ -91,7 +91,7 @@ function TomatoWrapper({ children }: { children: React.ReactNode }) {
   }, [currentMode])
   return (
     <div className="relative w-full h-full max-h-[85dvh] top-[8dvh]">
-      <div className=" flex flex-col items-center w-3/5 justify-between absolute inset-0 top-1/2 left-1/2 -translate-1/2 text-center">
+      <div className="flex flex-col items-center w-3/5 justify-between absolute inset-0 top-1/2 left-1/2 -translate-1/2 text-center gap-4">
         {children}
       </div>
       <CoreTomato color={tomatoColor} className="absolute -z-1 inset-0 m-auto max-h-[85dvh] w-auto" />

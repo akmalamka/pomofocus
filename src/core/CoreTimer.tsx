@@ -1,7 +1,7 @@
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
+import CoreButton from './CoreButton'
 
 export default function CoreTimer() {
   const { focusLength, shortBreakLength, longBreakLength, currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
@@ -163,32 +163,25 @@ export default function CoreTimer() {
       <Typography variant="h4" color="white" className="text-[200px] leading-[normal]">
         {timeLeft !== null
           ? (
-              <div className="flex items-center justify-center">
-                <div className="w-[5ch] tabular-nums">
-                  {String(Math.floor(timeLeft / 60)).padStart(2, '0')}
-                  :
-                  {String(timeLeft % 60).padStart(2, '0')}
-                </div>
+              <div className="w-[5ch] tabular-nums">
+                {String(Math.floor(timeLeft / 60)).padStart(2, '0')}
+                :
+                {String(timeLeft % 60).padStart(2, '0')}
               </div>
             )
           : null}
 
       </Typography>
-      <div className="flex flex-wrap gap-4 max-w-60% justify-center ">
-        <Button color="primary" onClick={toggleTimer}>
-          {isRunning ? 'Pause' : 'Start'}
-        </Button>
-        <Button color="white" onClick={resetTimer}>
-          Reset
-        </Button>
+      <div className="flex flex-col gap-4 max-w-60% justify-center items-center">
+        <div className="flex gap-4">
+          <CoreButton color="primary" onClick={toggleTimer} title={isRunning ? 'Pause' : 'Start'} />
+          <CoreButton color="white" onClick={resetTimer} title="Reset" />
+        </div>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'
           ? (
-              <Button color="white" onClick={handleSkipBreak}>
-                Skip Break
-              </Button>
+              <CoreButton color="white" onClick={handleSkipBreak} className="w-fit" title="Skip Break" />
             )
           : null}
-
       </div>
     </>
   )

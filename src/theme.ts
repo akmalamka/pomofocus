@@ -63,7 +63,7 @@ const theme = createTheme({
       lineHeight: 1,
     },
     h4: {
-      fontFamily: 'Heinz Label, serif',
+      fontFamily: 'SF Pro Display, sans-serif',
       fontSize: '10rem',
       lineHeight: 1,
     },
@@ -114,17 +114,14 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: ({ theme }) => ({
-          'fontFamily': 'Heinz Label, sans-serif',
-          'lineHeight': 1,
-          'textTransform': 'uppercase',
-          'borderRadius': 12,
-          'transition': 'all 0.2s ease',
-          'borderWidth': 2,
-          'borderStyle': 'solid',
-          'boxShadow': theme.shadows[3],
-          '&:hover': {
-            boxShadow: theme.shadows[6],
-          },
+          fontFamily: 'Heinz Label, sans-serif',
+          lineHeight: 1,
+          textTransform: 'uppercase',
+          borderRadius: 12,
+          transition: 'all 0.2s ease',
+          borderWidth: 2,
+          borderStyle: 'solid',
+          boxShadow: theme.shadows[3],
           // Responsive defaults
           [theme.breakpoints.down('md')]: {
             fontSize: '1.5rem',
@@ -141,49 +138,37 @@ const theme = createTheme({
         {
           props: { color: 'primary', size: 'medium' },
           style: ({ theme }) => ({
-            'backgroundColor': theme.palette.primary.main,
-            'color': theme.palette.primary.contrastText,
-            '&:hover': {
-              backgroundColor: theme.palette.primary.dark,
-            },
-            'borderColor': theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            borderColor: theme.palette.primary.contrastText,
           }),
         },
         // Primary small
         {
           props: { color: 'primary', size: 'small' },
           style: ({ theme }) => ({
-            'backgroundColor': theme.palette.primary.main,
-            'color': theme.palette.primary.contrastText,
-            'fontSize': '1.5rem',
-            '&:hover': {
-              backgroundColor: theme.palette.primary.dark,
-            },
-            'borderColor': theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            fontSize: '1.5rem',
+            borderColor: theme.palette.primary.contrastText,
           }),
         },
         // White medium
         {
           props: { color: 'white', size: 'medium' },
           style: ({ theme }) => ({
-            'backgroundColor': theme.palette.white.main,
-            'color': theme.palette.white.contrastText,
-            '&:hover': {
-              backgroundColor: theme.palette.grey[300],
-            },
-            'borderColor': theme.palette.white.contrastText,
+            backgroundColor: theme.palette.white.main,
+            color: theme.palette.white.contrastText,
+            borderColor: theme.palette.white.contrastText,
           }),
         },
         // White small
         {
           props: { color: 'white', size: 'small' },
           style: ({ theme }) => ({
-            'backgroundColor': theme.palette.white.main,
-            'color': theme.palette.white.contrastText,
-            'fontSize': '1.5rem',
-            '&:hover': {
-              backgroundColor: theme.palette.grey[100],
-            },
+            backgroundColor: theme.palette.white.main,
+            color: theme.palette.white.contrastText,
+            fontSize: '1.5rem',
           }),
         },
         // Disabled (applies to all colors)

@@ -1,0 +1,22 @@
+.icon-spin {
+  display: inline-block;
+  transition: transform 0.5s ease-in-out;
+}
+
+.icon-spin:hover {
+  animation: spin-forward 0.5s forwards;
+}
+
+.icon-spin:not(:hover) {
+  animation: spin-backward 0.5s forwards;
+}
+
+@keyframes spin-forward {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); }
+}
+
+@keyframes spin-backward {
+  from { transform: rotate(90deg); }
+  to { transform: rotate(0deg); }
+}
