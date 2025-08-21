@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import './fonts.css';
 
+@theme {
+  --animate-wiggle: wiggle 0.5s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+}
 
 :root {
   font-weight: 400;

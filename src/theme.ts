@@ -79,6 +79,10 @@ const theme = createTheme({
       fontSize: '1rem',
       letterSpacing: '0.02em',
     },
+    subtitle1: {
+      fontSize: '1.2rem',
+      letterSpacing: '0.02em',
+    },
     caption: {
       fontSize: '0.875rem',
       letterSpacing: '0.02em',

@@ -10,6 +10,7 @@ import LayoutTomato from '../layouts/LayoutTomato'
 export default function Home() {
   const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode } = useAppProvider()
   const [tempTaskName, setTempTaskName] = useState(taskName)
+  const MAX_TEXT_INPUT_CHARS = 20
 
   function handleContinue() {
     setTaskName(tempTaskName)
@@ -60,8 +61,14 @@ export default function Home() {
                   <Typography color="white" variant="h2">
                     Let's Start
                   </Typography>
-                  {/* TODO: add max character so it displays smoothly */}
-                  <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} />
+                  <div className="flex flex-col w-full gap-1">
+                    <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} slotProps={{ htmlInput: { maxLength: 20 } }} />
+                    <Typography color="white" variant="subtitle1" className="self-end">
+                      {tempTaskName.length}
+                      /
+                      {MAX_TEXT_INPUT_CHARS}
+                    </Typography>
+                  </div>
                   <div className="flex gap-4">
                     <CoreButton color="primary" disabled={!tempTaskName} onClick={handleContinue} title="Continue" />
                     <CoreButton color="white" onClick={() => setDisplayTimer(true)} title="Skip" />
