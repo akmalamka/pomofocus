@@ -18,7 +18,7 @@ export default function LayoutTomato({ children }: { children: React.ReactNode }
     }
   }, [currentMode])
   return (
-    <div className="relative w-full h-full max-h-[85dvh] top-[8dvh]">
+    <div className="relative w-full h-full max-h-[85dvh] top-[8dvh] z-20">
       <div className="flex flex-col items-center w-3/5 justify-between absolute inset-0 top-1/2 left-1/2 -translate-1/2 text-center gap-4">
         {children}
       </div>

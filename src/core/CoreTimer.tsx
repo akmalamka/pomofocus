@@ -139,7 +139,7 @@ export default function CoreTimer() {
         </div>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'
           ? (
-              <CoreButton color="white" onClick={handleSkipBreak} className="w-fit" title="Skip Break" />
+              <CoreButton color="white" onClick={handleSkipBreak} title="Skip Break" />
             )
           : null}
       </div>

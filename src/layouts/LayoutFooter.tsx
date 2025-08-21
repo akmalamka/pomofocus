@@ -10,7 +10,7 @@ export default function LayoutFooter() {
     setDisplayTimer(false)
   }
   return (
-    <footer className="absolute bottom-10 w-full flex justify-center">
+    <footer className="absolute bottom-10 w-full flex justify-center z-10">
       <div className="container">
         <CoreButton
           color="white"
