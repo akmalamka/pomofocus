@@ -84,7 +84,16 @@ export default function LayoutHeader() {
         </IconButton>
       </div>
 
-      <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer(false)}>
+      <Drawer
+        anchor="right"
+        open={openDrawer}
+        onClose={(_event, reason) => {
+          if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
+            return
+          }
+          toggleDrawer(false)
+        }}
+      >
         <div className="flex min-w-[300px] h-full py-8 px-10 flex-col gap-8">
           <div className="flex items-center justify-between">
             <Typography color="primary" variant="h3">
