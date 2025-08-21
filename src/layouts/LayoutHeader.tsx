@@ -17,6 +17,7 @@ interface SettingConfigType {
   information: string
   value: number | null
   onValueChange: (newValue: number | null) => void
+  minValue?: number
 }
 
 export default function LayoutHeader() {
@@ -55,9 +56,10 @@ export default function LayoutHeader() {
     },
     {
       label: 'Pomodoros until long break',
-      information: 'Number of completed pomodoros before a long break starts. Default is 4.',
+      information: 'Number of completed pomodoros before a long break starts. Default is 4 and minimum value is 2.',
       value: tempPomodoroUntilLongBreak,
       onValueChange: setTempPomodoroUntilLongBreak,
+      minValue: 2,
     },
     {
       label: 'Short break length (minutes)',
@@ -78,18 +80,18 @@ export default function LayoutHeader() {
       <div className="h-[var(--navbar-height)] w-full flex items-start justify-between container my-10">
         <img src="/logo.svg" alt="Pomofocus Logo" className="h-[32px]" />
         <IconButton aria-label="Settings" onClick={toggleDrawer(true)} color="white">
-          <SettingsIcon sx={{ fontSize: 24 }} color="primary" className="icon-spin" />
+          <SettingsIcon sx={{ fontSize: 32 }} color="primary" className="icon-spin" />
         </IconButton>
       </div>
 
-      <Drawer anchor="left" open={openDrawer} onClose={toggleDrawer(false)}>
+      <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer(false)}>
         <div className="flex min-w-[300px] h-full py-8 px-10 flex-col gap-8">
           <div className="flex items-center justify-between">
             <Typography color="primary" variant="h3">
               Settings
             </Typography>
             <IconButton aria-label="Close" onClick={toggleDialog(true)}>
-              <CloseIcon sx={{ fontSize: 24 }} color="primary" className="icon-spin" />
+              <CloseIcon sx={{ fontSize: 32 }} color="primary" className="icon-spin" />
             </IconButton>
           </div>
           <div className="flex flex-col justify-between h-full">
@@ -121,7 +123,7 @@ export default function LayoutHeader() {
   )
 }
 
-function SettingsItem({ label, information, value, onValueChange }: SettingConfigType) {
+function SettingsItem({ label, information, value, onValueChange, minValue }: SettingConfigType) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -136,9 +138,9 @@ function SettingsItem({ label, information, value, onValueChange }: SettingConfi
   return (
     <div className="flex gap-4 justify-between">
       <div className="flex w-full justify-between items-center">
-        <Typography variant="body2">{label}</Typography>
+        <Typography variant="body2" color="primary">{label}</Typography>
         <IconButton aria-label="More information" onClick={handleClick}>
-          <InfoOutlineIcon color="primary" />
+          <InfoOutlineIcon color="primary" sx={{ fontSize: 32 }} />
         </IconButton>
         <Popover
           open={open}
@@ -146,11 +148,11 @@ function SettingsItem({ label, information, value, onValueChange }: SettingConfi
           onClose={handleClose}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'right',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left',
+            horizontal: 'right',
           }}
           sx={{
             '& .MuiPopover-paper': {
@@ -160,20 +162,20 @@ function SettingsItem({ label, information, value, onValueChange }: SettingConfi
               borderRadius: '12px',
               px: 2,
               py: 4,
-              maxWidth: '200px',
+              maxWidth: '300px',
             },
           }}
         >
           <Typography color="primary" variant="h5" className="text-center">
             Information
           </Typography>
-          <Typography color="primary" variant="caption" className="text-center">
+          <Typography color="primary" variant="caption">
             {information}
           </Typography>
         </Popover>
 
       </div>
-      <CoreNumberField value={value} onValueChange={onValueChange} />
+      <CoreNumberField value={value} onValueChange={onValueChange} minValue={minValue} />
     </div>
   )
 }

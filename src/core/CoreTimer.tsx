@@ -3,29 +3,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
 import CoreButton from './CoreButton'
 
-export default function CoreTimer() {
-  const { focusLength, shortBreakLength, longBreakLength, currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
+interface CoreTimerProps {
+  timeLeft: number
+  initialTime: number
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>
+}
+export default function CoreTimer({ timeLeft, setTimeLeft, initialTime }: CoreTimerProps) {
+  const { currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
   const [isRunning, setIsRunning] = useState(false)
-
-  const initialTime = useMemo(() => {
-    switch (currentMode) {
-      case 'focus':
-        return focusLength
-      case 'shortBreak':
-        return shortBreakLength
-      case 'longBreak':
-        return longBreakLength
-      default:
-        return focusLength
-    }
-  }, [currentMode, focusLength, shortBreakLength, longBreakLength])
-
-  const [timeLeft, setTimeLeft] = useState(initialTime! * 60) // Convert minutes to seconds
-
-  // Everytime time in option changes, reset the timer
-  useEffect(() => {
-    setTimeLeft(initialTime! * 60) // Convert minutes to seconds
-  }, [initialTime])
 
   const intervalRef = useRef<number | null>(null)
 
@@ -73,7 +58,7 @@ export default function CoreTimer() {
   function resetTimer() {
     clearInterval(intervalRef.current!)
     intervalRef.current = null
-    setTimeLeft(initialTime! * 60)
+    setTimeLeft(initialTime)
     setIsRunning(false)
   }
 
@@ -87,7 +72,7 @@ export default function CoreTimer() {
   // If timeLeft reaches 0, reset the timer and change mode if necessary
   useEffect(() => {
     if (timeLeft === 0) {
-      setTimeLeft(initialTime! * 60) // Reset to initial time in seconds
+      setTimeLeft(initialTime) // Reset to initial time in seconds
 
       if (currentMode === 'focus') {
         if (pomodoroUntilLongBreak && pomodoroUntilLongBreak > 1) {
@@ -104,7 +89,7 @@ export default function CoreTimer() {
     }
   }, [timeLeft])
 
-  const currentModeDisplay = useMemo(() => {
+  const currentModeText = useMemo(() => {
     switch (currentMode) {
       case 'focus':
         return 'Focus'
@@ -119,7 +104,7 @@ export default function CoreTimer() {
 
   return (
     <>
-      <Typography color="white" variant="h2">{currentModeDisplay}</Typography>
+      <Typography color="white" variant="h2">{currentModeText}</Typography>
       <Typography variant="h4" color="white" className={`text-[200px] leading-[normal] ${timeLeft < 10 ? 'animate-wiggle' : ''}`}>
         {timeLeft !== null
           ? (

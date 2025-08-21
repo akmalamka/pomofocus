@@ -1,12 +1,23 @@
 type CoreTomatoProps = React.SVGProps<SVGSVGElement> & {
-  color?: string
+  baseColor?: string
+  fillColor?: string
+  progress?: number
 }
 
-export default function CoreTomato({ color = 'currentColor', ...props }: CoreTomatoProps) {
+export default function CoreTomato({ baseColor, fillColor, progress = 0, ...props }: CoreTomatoProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 698 772" style={{ color }} {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 698 772" {...props}>
+      {/* Linear gradient to show progress */}
+      <defs>
+        <linearGradient id="tomato-gradient" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor={fillColor} />
+          <stop offset={`${progress * 100}%`} stopColor={fillColor} />
+          <stop offset={`${progress * 100}%`} stopColor={baseColor} />
+          <stop offset="100%" stopColor={baseColor} />
+        </linearGradient>
+      </defs>
       <g filter="url(#a)">
-        <path fill="currentColor" d="M337.767 121.724c69.122 0 133.678-32.436 180.97-18.254C620.045 133.848 681 213.852 681 355.221c0 207.36-109.812 388.529-327.006 388.529C136.801 743.75 4 597.964 4 390.603 4 240.952 73.168 152.598 193.308 115.01c46.329-14.495 84.013 6.714 144.459 6.714Z" />
+        <path fill="url(#tomato-gradient)" d="M337.767 121.724c69.122 0 133.678-32.436 180.97-18.254C620.045 133.848 681 213.852 681 355.221c0 207.36-109.812 388.529-327.006 388.529C136.801 743.75 4 597.964 4 390.603 4 240.952 73.168 152.598 193.308 115.01c46.329-14.495 84.013 6.714 144.459 6.714Z" />
         <path stroke="#EDE3D9" strokeDasharray="16 16" strokeWidth="8" d="M337.767 121.724c69.122 0 133.678-32.436 180.97-18.254C620.045 133.848 681 213.852 681 355.221c0 207.36-109.812 388.529-327.006 388.529C136.801 743.75 4 597.964 4 390.603 4 240.952 73.168 152.598 193.308 115.01c46.329-14.495 84.013 6.714 144.459 6.714Z" />
       </g>
       <g filter="url(#b)">

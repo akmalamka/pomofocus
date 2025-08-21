@@ -8,7 +8,7 @@ import { useGreeting } from '../hooks/use-greeting'
 import LayoutTomato from '../layouts/LayoutTomato'
 
 export default function Home() {
-  const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode } = useAppProvider()
+  const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode, focusLength, shortBreakLength, longBreakLength } = useAppProvider()
   const [tempTaskName, setTempTaskName] = useState(taskName)
   const MAX_TEXT_INPUT_CHARS = 20
 
@@ -43,6 +43,26 @@ export default function Home() {
     }
   }, [displayTimer, currentMode])
 
+  const initialTime = useMemo(() => {
+    switch (currentMode) {
+      case 'focus':
+        return focusLength
+      case 'shortBreak':
+        return shortBreakLength
+      case 'longBreak':
+        return longBreakLength
+      default:
+        return focusLength
+    }
+  }, [currentMode, focusLength, shortBreakLength, longBreakLength])
+
+  const [timeLeft, setTimeLeft] = useState(initialTime! * 60) // Convert minutes to seconds
+
+  // Everytime time in option changes, reset the timer
+  useEffect(() => {
+    setTimeLeft(initialTime! * 60) // Convert minutes to seconds
+  }, [initialTime])
+
   useEffect(() => {
     setTempTaskName('')
   }, [displayTimer])
@@ -50,32 +70,37 @@ export default function Home() {
   return (
     <section className="flex justify-center h-screen w-screen relative overflow-hidden">
       <div className="container h-full relative max-w-3/5 flex flex-col items-center justify-center gap-4">
-        <Typography color="creme" variant="h1" className="absolute top-10 h-24">
+        <Typography color="creme" variant="h1" className="absolute top-10 h-24 text-center">
           {headingText}
         </Typography>
-        <LayoutTomato>
-          {displayTimer
-            ? <CoreTimer />
-            : (
-                <>
-                  <Typography color="white" variant="h2">
-                    Let's Start
-                  </Typography>
-                  <div className="flex flex-col w-full gap-1">
-                    <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} slotProps={{ htmlInput: { maxLength: 20 } }} />
-                    <Typography color="white" variant="subtitle1" className="self-end">
-                      {tempTaskName.length}
-                      /
-                      {MAX_TEXT_INPUT_CHARS}
-                    </Typography>
-                  </div>
-                  <div className="flex gap-4">
-                    <CoreButton color="primary" disabled={!tempTaskName} onClick={handleContinue} title="Continue" />
-                    <CoreButton color="white" onClick={() => setDisplayTimer(true)} title="Skip" />
-                  </div>
-                </>
-              )}
-        </LayoutTomato>
+        {initialTime !== null
+          ? (
+              <LayoutTomato timeLeft={timeLeft} totalTime={initialTime * 60}>
+                {displayTimer
+                  ? <CoreTimer timeLeft={timeLeft} setTimeLeft={setTimeLeft} initialTime={initialTime * 60} />
+                  : (
+                      <>
+                        <Typography color="white" variant="h2">
+                          Let's Start
+                        </Typography>
+                        <div className="flex flex-col w-full gap-1">
+                          <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} slotProps={{ htmlInput: { maxLength: 20 } }} />
+                          <Typography color="white" variant="subtitle1" className="self-end">
+                            {tempTaskName.length}
+                            /
+                            {MAX_TEXT_INPUT_CHARS}
+                          </Typography>
+                        </div>
+                        <div className="flex gap-4">
+                          <CoreButton color="primary" disabled={!tempTaskName} onClick={handleContinue} title="Continue" />
+                          <CoreButton color="white" onClick={() => setDisplayTimer(true)} title="Skip" />
+                        </div>
+                      </>
+                    )}
+              </LayoutTomato>
+            )
+          : null}
+
       </div>
     </section>
   )
