@@ -1,69 +1,63 @@
-# React + TypeScript + Vite
+# Pomofocus
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pomofocus is a simple and intuitive **Pomodoro timer** designed to help you stay focused and productive.
+It follows the Pomodoro Technique by alternating between focused work sessions and short or long breaks.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Customizable Timer** – Set your own focus, short break, and long break durations.
+- **Skip & Reset** – Skip breaks or reset timers whenever you need.
+- **Persistent Settings** – Keep your preferences saved for your workflow.
+- **Clean & Minimal UI** – Focus on your tasks without distractions.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Clone this repository and install the dependencies:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/your-username/pomofocus.git
+cd pomofocus
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-import reactDom from 'eslint-plugin-react-dom'
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
+## Usage
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Start the development server:
+
+```bash
+pnpm run dev
 ```
+
+Then open your browser at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## How It Works
+
+1. Fill in your task (optional)
+2. Start focusing
+3. Take a break
+4. Repeat
+
+---
+
+## Technologies
+
+- **React**
+- **TypeScript**
+- **Material UI (MUI)**
+- **Tailwind CSS**
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---

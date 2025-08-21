@@ -1,7 +1,7 @@
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAppProvider } from '../context'
+import CoreButton from './CoreButton'
 
 export default function CoreTimer() {
   const { focusLength, shortBreakLength, longBreakLength, currentMode, setCurrentMode, pomodoroUntilLongBreak, setPomodoroUntilLongBreak } = useAppProvider()
@@ -87,8 +87,6 @@ export default function CoreTimer() {
   // If timeLeft reaches 0, reset the timer and change mode if necessary
   useEffect(() => {
     if (timeLeft === 0) {
-      // clearInterval(intervalRef.current!);
-      // intervalRef.current = null;
       setTimeLeft(initialTime! * 60) // Reset to initial time in seconds
 
       if (currentMode === 'focus') {
@@ -106,37 +104,6 @@ export default function CoreTimer() {
     }
   }, [timeLeft])
 
-  const currentColor = useMemo(() => {
-    // start = #E61004 → (230, 16, 4)
-    // end   = #E66559 → (230, 101, 89)
-    const startColor = [230, 16, 4]
-    // const endColor = [230, 101, 89];
-    const endColor = [23, 119, 33]
-
-    const progress = 1 - timeLeft / (initialTime! * 60)
-
-    return startColor.map((c, i) =>
-      Math.round(c + (endColor[i] - c) * progress),
-    )
-  }, [timeLeft, initialTime])
-
-  useEffect(() => {
-    // This effect is used to update the gradient color when currentColor changes
-  }, [currentColor])
-  // useEffect(() => {
-  //   const progress = 1 - timeLeft / (initialTime! * 60);
-
-  //   // start = #E61004 → (230, 16, 4)
-  //   // end   = #E66559 → (230, 101, 89)
-  //   const startColor = [230, 16, 4];
-  //   const endColor = [230, 101, 89];
-
-  //   // const currentColor = startColor.map((c, i) =>
-  //   //   Math.round(c + (endColor[i] - c) * progress)
-  //   // );
-
-  // }, [currentMode, initialTime]);
-
   const currentModeDisplay = useMemo(() => {
     switch (currentMode) {
       case 'focus':
@@ -152,43 +119,29 @@ export default function CoreTimer() {
 
   return (
     <>
-      {/* <CoreTomatoIcon
-        // className="w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1 text-blue-500"
-        // currentColor={currentColor}
-        // style={{ color: `linear-gradient(135deg, rgb(${currentColor.join(",")}), #000000)` }}
-      /> */}
-      {/* <img src="/tomato.svg" alt="Logo" className='w-screen h-screen absolute left-1/2 top-1/2 -translate-1/2 -z-1'
-        /> */}
       <Typography color="white" variant="h2">{currentModeDisplay}</Typography>
-      <Typography variant="h4" color="white" className="text-[200px] leading-[normal]">
+      <Typography variant="h4" color="white" className={`text-[200px] leading-[normal] ${timeLeft < 10 ? 'animate-wiggle' : ''}`}>
         {timeLeft !== null
           ? (
-              <div className="flex items-center justify-center">
-                <div className="w-[5ch] tabular-nums">
-                  {String(Math.floor(timeLeft / 60)).padStart(2, '0')}
-                  :
-                  {String(timeLeft % 60).padStart(2, '0')}
-                </div>
+              <div className="w-[5ch] tabular-nums">
+                {String(Math.floor(timeLeft / 60)).padStart(2, '0')}
+                :
+                {String(timeLeft % 60).padStart(2, '0')}
               </div>
             )
           : null}
 
       </Typography>
-      <div className="flex flex-wrap gap-4 max-w-60% justify-center ">
-        <Button color="primary" onClick={toggleTimer}>
-          {isRunning ? 'Pause' : 'Start'}
-        </Button>
-        <Button color="white" onClick={resetTimer}>
-          Reset
-        </Button>
+      <div className="flex flex-col gap-4 max-w-60% justify-center items-center">
+        <div className="flex gap-4">
+          <CoreButton color="primary" onClick={toggleTimer} title={isRunning ? 'Pause' : 'Start'} />
+          <CoreButton color="white" onClick={resetTimer} title="Reset" />
+        </div>
         { currentMode === 'shortBreak' || currentMode === 'longBreak'
           ? (
-              <Button color="white" onClick={handleSkipBreak}>
-                Skip Break
-              </Button>
+              <CoreButton color="white" onClick={handleSkipBreak} title="Skip Break" />
             )
           : null}
-
       </div>
     </>
   )

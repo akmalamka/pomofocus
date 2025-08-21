@@ -1,5 +1,5 @@
-import Button from '@mui/material/Button'
 import { useAppProvider } from '../context'
+import CoreButton from '../core/CoreButton'
 
 export default function LayoutFooter() {
   const { setDisplayTimer, setTaskName, setCurrentMode } = useAppProvider()
@@ -10,14 +10,13 @@ export default function LayoutFooter() {
     setDisplayTimer(false)
   }
   return (
-    <footer className="absolute bottom-10 w-full flex justify-center">
+    <footer className="absolute bottom-10 w-full flex justify-center z-10">
       <div className="container">
-        <Button
+        <CoreButton
           color="white"
           onClick={handleNewTask}
-        >
-          New task
-        </Button>
+          title="New Task"
+        />
       </div>
     </footer>
   )

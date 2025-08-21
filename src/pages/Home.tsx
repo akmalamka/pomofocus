@@ -1,15 +1,16 @@
-import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useAppProvider } from '../context'
+import CoreButton from '../core/CoreButton'
 import CoreTimer from '../core/CoreTimer'
-import CoreTomato from '../core/CoreTomato'
 import { useGreeting } from '../hooks/use-greeting'
+import LayoutTomato from '../layouts/LayoutTomato'
 
 export default function Home() {
   const { taskName, setTaskName, displayTimer, setDisplayTimer, currentMode } = useAppProvider()
   const [tempTaskName, setTempTaskName] = useState(taskName)
+  const MAX_TEXT_INPUT_CHARS = 20
 
   function handleContinue() {
     setTaskName(tempTaskName)
@@ -42,13 +43,17 @@ export default function Home() {
     }
   }, [displayTimer, currentMode])
 
+  useEffect(() => {
+    setTempTaskName('')
+  }, [displayTimer])
+
   return (
     <section className="flex justify-center h-screen w-screen relative overflow-hidden">
       <div className="container h-full relative max-w-3/5 flex flex-col items-center justify-center gap-4">
         <Typography color="creme" variant="h1" className="absolute top-10 h-24">
           {headingText}
         </Typography>
-        <TomatoWrapper>
+        <LayoutTomato>
           {displayTimer
             ? <CoreTimer />
             : (
@@ -56,45 +61,22 @@ export default function Home() {
                   <Typography color="white" variant="h2">
                     Let's Start
                   </Typography>
-                  {/* TODO: add max character so it displays smoothly */}
-                  <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} />
+                  <div className="flex flex-col w-full gap-1">
+                    <TextField color="primary" placeholder="What would you like to accomplish today?" variant="outlined" value={tempTaskName} onChange={handleInputChange} slotProps={{ htmlInput: { maxLength: 20 } }} />
+                    <Typography color="white" variant="subtitle1" className="self-end">
+                      {tempTaskName.length}
+                      /
+                      {MAX_TEXT_INPUT_CHARS}
+                    </Typography>
+                  </div>
                   <div className="flex gap-4">
-                    <Button color="primary" disabled={!tempTaskName} onClick={handleContinue}>
-                      Continue
-                    </Button>
-                    <Button color="white" onClick={() => setDisplayTimer(true)}>
-                      Skip
-                    </Button>
+                    <CoreButton color="primary" disabled={!tempTaskName} onClick={handleContinue} title="Continue" />
+                    <CoreButton color="white" onClick={() => setDisplayTimer(true)} title="Skip" />
                   </div>
                 </>
               )}
-        </TomatoWrapper>
+        </LayoutTomato>
       </div>
     </section>
-  )
-}
-
-function TomatoWrapper({ children }: { children: React.ReactNode }) {
-  const { currentMode } = useAppProvider()
-
-  const tomatoColor = useMemo(() => {
-    switch (currentMode) {
-      case 'focus':
-        return '#E61004'
-      case 'shortBreak':
-        return '#D18D24'
-      case 'longBreak':
-        return '#405647'
-      default:
-        return ''
-    }
-  }, [currentMode])
-  return (
-    <div className="relative w-full h-full max-h-[85dvh] top-[8dvh]">
-      <div className=" flex flex-col items-center w-3/5 justify-between absolute inset-0 top-1/2 left-1/2 -translate-1/2 text-center">
-        {children}
-      </div>
-      <CoreTomato color={tomatoColor} className="absolute -z-1 inset-0 m-auto max-h-[85dvh] w-auto" />
-    </div>
   )
 }

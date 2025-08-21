@@ -1,0 +1,24 @@
+.button-content {
+  display: block;
+  transform: translateY(0);
+  transition: transform 280ms ease-in-out;
+
+  &:is(:where(.group):hover *) {
+      transform: translateY(-100%);
+    }
+}
+
+.button-content::after {
+  /* This span works as the duplicate text of the button and will appear once we hover it */
+    content: attr(data-title);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(100%);
+    transition: transform 280ms ease-in-out;
+
+    &:is(:where(.group):hover *) {
+      transform: translateY(0%);
+    }
+}

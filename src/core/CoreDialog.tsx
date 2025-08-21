@@ -1,10 +1,10 @@
-import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography'
+import CoreButton from './CoreButton'
 
 interface ConfirmDialogProps {
   open: boolean
@@ -40,12 +40,8 @@ export default function ConfirmDialog({ open, title, description, onClose, onCon
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', gap: 3 }}>
-        <Button onClick={onConfirm} color="primary" size="small">
-          Save
-        </Button>
-        <Button onClick={onClose} color="white" size="small" autoFocus>
-          Close
-        </Button>
+        <CoreButton onClick={onConfirm} color="primary" size="small" title="Save" />
+        <CoreButton onClick={onClose} color="white" size="small" autoFocus title="Close" />
       </DialogActions>
     </Dialog>
   )
