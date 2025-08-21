@@ -12,13 +12,18 @@
       transform: rotate(3deg);
     }
   }
+
+  --color-focus: #E61004;
+  --color-short-break: #D18D24;
+  --color-long-break: #405647;
+  --color-primary: #94182C;
+  --color-primary-dark: #67101E;
 }
 
 :root {
   font-weight: 400;
   overflow: hidden;
-  /* TODO: check why background default in theme not applies, instead this background-color applies */
-  background-color: #94182C;
+  background-color: var(--color-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
